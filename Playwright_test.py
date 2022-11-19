@@ -1,10 +1,38 @@
 from playwright.sync_api import sync_playwright
-
+''' from code reCODE yt channel'''
 def main():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
         Page = browser.new_page()
         Page.goto('https://quotes.toscrape.com/') 
+        heading_titles_selector = '//h1/a'
+        heading = Page.query_selector(heading_titles_selector)
+        #print(heading.inner_text())
+        #visit login link or route : 
+        login = Page.query_selector('[href="/login"]')
+        login.click()
+        
+        user_input = Page.query_selector('[id="username"]') #css selector
+        user_input.type("user")
+
+        pass_input = Page.query_selector('//input[@id="password"]') #xpath selector
+        pass_input.type('passtext')
+
+        #button login -  type="submit"
+        Page.query_selector('[type="submit"]').click()
+        
+        selector = '//*[@href="/logout"]'
+        try:
+            logout = page.wait_for_selector(selector, timeout=5000)
+        except:
+            print('login failed')
+            exit()
+
+        quotes = page.query_selector_all('[class="quote"]')
+        for quote in quotes:
+            print(quote.query_selector('.text').inner_text())
+
+
 
         Page.wait_for_timeout(7000)
         
