@@ -1,5 +1,5 @@
 from playwright.sync_api import sync_playwright
-''' from code reCODE yt channel'''
+''' from code reCODE yt channel '''
 def main():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
@@ -23,7 +23,7 @@ def main():
         
         selector = '//*[@href="/logout"]'
         try:
-            logout = page.wait_for_selector(selector, timeout=5000)
+            logout = page.wait_for_selector(selector, timeout=7000)
         except:
             print('login failed')
             exit()
@@ -34,7 +34,7 @@ def main():
 
 
 
-        Page.wait_for_timeout(7000)
+        Page.wait_for_timeout(10000)
         
         
         browser.close()
